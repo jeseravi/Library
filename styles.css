@@ -2,7 +2,7 @@
     font-family:'Roboto', sans-serif;
     display:grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 150px 50px calc(100vh - 200px);
+    grid-template-rows: 150px 100px calc(100vh - 250px);
     grid-template-areas:
     "header"
     "instructions"
@@ -16,21 +16,98 @@
 }
 
 .headerText{
-    margin-left:12.5%;
-    margin-bottom:auto;
-    margin-top:auto;
+    margin:auto;
     color:White;
     font-size:50px;
 }
 
-.instructions{
+#instructions{
     grid-area:instructions;
     background-color: #2d4059;
-    
+
 }
 
 .libraryArea{
     grid-area:libraryArea;
     background: #2d4059;
     min-height:500px;
+}
+
+#mainButton{
+    color:white;
+    background-color: #2185d5;
+    border-radius:50%;
+    border:1px solid #2185d5;
+    width:50px;
+    height:50px;
+    margin-left:50px;
+    font-size:30px;
+    margin-top:25px;
+    cursor: pointer;
+    
+}
+
+button:hover{
+    
+    cursor:pointer;
+    transform: scale(1.07);   
+}
+
+* {box-sizing: border-box;}
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  border: 3px solid #f1f1f1;
+  border-radius:12px;
+  z-index: 9;
+
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+  opacity: 1;
 }
