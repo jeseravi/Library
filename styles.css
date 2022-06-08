@@ -1,0 +1,36 @@
+.pageContainer{
+    font-family:'Roboto', sans-serif;
+    display:grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 150px 50px calc(100vh - 200px);
+    grid-template-areas:
+    "header"
+    "instructions"
+    "libraryArea"
+}
+
+.header{
+    grid-area:header;
+    background-color: #2185d5;
+    display:grid;
+}
+
+.headerText{
+    margin-left:12.5%;
+    margin-bottom:auto;
+    margin-top:auto;
+    color:White;
+    font-size:50px;
+}
+
+.instructions{
+    grid-area:instructions;
+    background-color: #2d4059;
+    
+}
+
+.libraryArea{
+    grid-area:libraryArea;
+    background: #2d4059;
+    min-height:500px;
+}
