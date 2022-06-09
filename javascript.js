@@ -6,16 +6,24 @@ function closeForm() {
     document.getElementById("myForm").style.display = "none";
 }
 
+var myForm=document.getElementById("myForm");
+myForm.onsubmit=function(){
+
+}
 
 
-
-
-
-
-
-
-
-
+//stores form data in local storage
+function saveData()
+    {
+        let title,author;
+        var readStatus = document.querySelector('input[name = "readStatus"]:checked').value;
+        console.log(readStatus);
+        title=document.getElementById("title").value;
+        author=document.getElementById("author").value;
+        localStorage.setItem("title",title);
+        localStorage.setItem("author",author);
+        localStorage.setItem("readStatus",readStatus);
+    }
 
 function generateElement(whatIsIt,entryName,innerHTML,whereToPut,id,chosenClass){
 
