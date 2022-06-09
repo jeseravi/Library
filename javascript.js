@@ -16,27 +16,24 @@ function saveData(){
     let book;
 
     
-    //terminates function and throws error if book title and author has already been added
-    //if(book[0]&&book[1]){
+    //terminates function and throws error if book title & author combo has already been added
 
-   // }
+    for(i=0;i<myLibrary.length;i++){
+        if(myLibrary[i][0]==document.getElementById("title").value 
+        && myLibrary[i][1]==document.getElementById("author").value){
+            alert("A book with this author & title has already been added to your collection");
+
+            document.getElementById('form').reset();
+
+            return
+        }
+    }
 
     let readStatus = document.querySelector('input[name = "readStatus"]:checked').value;
     let title=document.getElementById("title").value;
     let author=document.getElementById("author").value;
 
     book=[title,author,readStatus];
-
-    for(i=0;i<myLibrary.length;i++){
-        if(myLibrary[i]=book[0]){
-            alert("A book with this title has already been added to your collection");
-
-            document.getElementById('form').reset();
-
-            return
-        }
-
-    }
 
     myLibrary.push(book);
 
@@ -45,13 +42,13 @@ function saveData(){
 
 //take data from the book array and make a card with it    
 
-    generateElement("div",book[0],"","libraryArea",book[0],"form-container generatedFormContainer")
-    generateElement("div","label","Title: " + book[0],book[0],"generatedTitle","generatedLabel")
-    generateElement("div","label","Author: " + book[1],book[0],"generatedDiv","generatedLabel")
-    generateElement("hr","label","",book[0],"generatedHr","generatedLabel")
-    generateElement("div","label","Read: " + book[2],book[0],"generatedDiv","generatedLabel")
-    generateElement("button","label","Update",book[0],"updateButton","btn")
-    generateElement("button","label","Close",book[0],"updateButton","btn cancel")
+    generateElement("div",book[0],"","libraryArea",book[0]+book[1],"form-container generatedFormContainer")
+    generateElement("div","label","Title: " + book[0],book[0]+book[1],"generatedTitle","generatedLabel")
+    generateElement("div","label","Author: " + book[1],book[0]+book[1],"generatedDiv","generatedLabel")
+    generateElement("hr","label","",book[0]+book[1],"generatedHr","generatedLabel")
+    generateElement("div","label","Read: " + book[2],book[0]+book[1],"generatedDiv","generatedLabel")
+    generateElement("button","label","Update",book[0]+book[1],"updateButton","btn")
+    generateElement("button","label","Close",book[0]+book[1],"updateButton","btn cancel")
 
 
 

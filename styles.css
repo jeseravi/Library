@@ -1,4 +1,10 @@
+body{
+    height:100%;
+    
+}
+
 .pageContainer{
+    background-color:#2d4059;
     font-family:'Roboto', sans-serif;
     display:grid;
     grid-template-columns: 1fr;
@@ -117,6 +123,7 @@ button:hover{
     background: #2d4059;
     display:flex;
     flex-wrap:wrap;
+    overflow:auto;
 
 }
 
@@ -142,4 +149,5 @@ button:hover{
 .generatedFormContainer{
     margin-left:50px;
     max-height:350px;
+    margin-top:50px;
 }
