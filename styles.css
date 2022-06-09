@@ -27,12 +27,6 @@
 
 }
 
-#libraryArea{
-    grid-area:libraryArea;
-    background: #2d4059;
-    min-height:500px;
-}
-
 #mainButton{
     color:white;
     background-color: #2185d5;
@@ -86,6 +80,7 @@ button:hover{
   margin: 5px 0 22px 0;
   border: none;
   background: #f1f1f1;
+
 }
 
 /* When the inputs get focus, do something */
@@ -115,4 +110,36 @@ button:hover{
 /* Add some hover effects to buttons */
 .form-container .btn:hover, .open-button:hover {
   opacity: 1;
+}
+
+#libraryArea{
+    grid-area:libraryArea;
+    background: #2d4059;
+    display:flex;
+    flex-wrap:wrap;
+
+}
+
+
+#generatedTitle{
+    font-weight:bold;
+    color:white;
+    background-color:#2185d5;
+    padding:25px;
+    font-size:20px;
+    display:flex;
+    justify-content: center;
+    margin-bottom:10px;
+}
+
+#generatedDiv{
+    font-weight:bold;
+    font-size:17px;
+    padding:15px;
+    margin-bottom:10px;
+}
+
+.generatedFormContainer{
+    margin-left:50px;
+    max-height:350px;
 }

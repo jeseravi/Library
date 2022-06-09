@@ -26,22 +26,22 @@
               <label><b>Title</b></label>
               <input type="text" id="title" placeholder="Pendragon" name="title" required>
               <label><b>Author</b></label>
-              <input type="password" id="author" placeholder="D. J. MacHale" name="author" required>
-
+              <input type="text" id="author" placeholder="D. J. MacHale" name="author" required>
               <label><b>Read?</b></label>
               <br>
               <input type="radio" id="yesStatus" name="readStatus" value="Yes" required>
               <label><b>Yes</b></label>
               <input type="radio" id="noStatus" name="readStatus" value="No" required>
               <label><b>No</b></label>
-              <button type="submit" onclick="saveData()" class="btn">Add to Collection</button>
+              <!--Not actually submitting form because it sends the data to a webpage?--> 
+              <button type="button" onclick="closeForm();saveData();" class="btn">Add to Collection</button>
               <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
             </form>
         </div>
     </div>
 
     <div id="libraryArea">
-        this is where all the stuff should go
+
     </div>
 
 </div>
