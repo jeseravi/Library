@@ -27,7 +27,7 @@
 
 }
 
-.libraryArea{
+#libraryArea{
     grid-area:libraryArea;
     background: #2d4059;
     min-height:500px;
@@ -53,7 +53,7 @@ button:hover{
     transform: scale(1.07);   
 }
 
-#readStatus{
+#yesStatus, #noStatus{
     margin-bottom:10px;
 }
 
