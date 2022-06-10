@@ -7,15 +7,28 @@ function closeForm() {
 }
 
 //array of each book
-let myLibrary=[];
-
+let myLibrary = []
+//myLibrary should match local storage
+if(window.localStorage.getItem("myLibrary")===null){
+    window.localStorage.setItem("myLibrary",JSON.stringify(myLibrary));  
+}
+else{
+    myLibrary = JSON.parse(localStorage.getItem("myLibrary"));
+}
 
 //puts data from form into array book
 function saveData(){
 
     let book;
 
-    if(document.getElementById("title").value =="" && document.getElementById("author").value=="" ){
+    if(document.getElementById("title").value ==""){
+
+        alert("You must fill in both a title and author")
+        return
+
+    } 
+    if(document.getElementById("author").value=="" ){
+        
         alert("You must fill in both a title and author")
         return;
     }
@@ -43,7 +56,7 @@ function saveData(){
     book=[title,author,readStatus,indexHelper];
 
     myLibrary.push(book);
-
+    
     //reset the form
     document.getElementById('form').reset();
 
@@ -69,20 +82,23 @@ function saveData(){
 
             if(myLibrary[i][3]==indexHelper){
                 myLibrary = myLibrary.splice(i,i);
+
+                
             }
 
             else{
                 console.log("not yet")
+                
             }
 
         }
 
     })
 
-//update button event listener
-//create the function that toggles a book's read status on your Book prototype instance
-let updateButtonListener = document.getElementById("updateButton"+book[0]+book[1]);
-updateButtonListener.addEventListener("click",function(event){
+    //update button event listener
+    //create the function that toggles a book's read status on your Book prototype instance
+    let updateButtonListener = document.getElementById("updateButton"+book[0]+book[1]);
+    updateButtonListener.addEventListener("click",function(event){
 
 
 
@@ -93,12 +109,15 @@ updateButtonListener.addEventListener("click",function(event){
 
             //change the displayed value to No
             document.getElementById("generatedDiv"+book[0]+book[1]).innerHTML="Read: No"
-                    
+            
+
         }
 
         else{
             myLibrary[i][2]="Yes";
             document.getElementById("generatedDiv"+book[0]+book[1]).innerHTML="Read: Yes"
+            
+
         }
     }
 
@@ -106,10 +125,7 @@ updateButtonListener.addEventListener("click",function(event){
     //else(//if read//)
 
     //update info on card based on this prototype change
-})
-
-
-
+    })
 }
 
 
