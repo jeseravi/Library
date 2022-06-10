@@ -7,14 +7,8 @@ function closeForm() {
 }
 
 //array of each book
-let myLibrary = []
-//myLibrary should match local storage
-if(window.localStorage.getItem("myLibrary")===null){
-    window.localStorage.setItem("myLibrary",JSON.stringify(myLibrary));  
-}
-else{
-    myLibrary = JSON.parse(localStorage.getItem("myLibrary"));
-}
+let myLibrary=[];
+
 
 //puts data from form into array book
 function saveData(){
@@ -22,13 +16,12 @@ function saveData(){
     let book;
 
     if(document.getElementById("title").value ==""){
-
         alert("You must fill in both a title and author")
-        return
+        return;
 
     } 
+    
     if(document.getElementById("author").value=="" ){
-        
         alert("You must fill in both a title and author")
         return;
     }
@@ -56,7 +49,7 @@ function saveData(){
     book=[title,author,readStatus,indexHelper];
 
     myLibrary.push(book);
-    
+
     //reset the form
     document.getElementById('form').reset();
 
@@ -66,7 +59,7 @@ function saveData(){
     generateElement("div","label",book[0],book[0]+book[1],"generatedTitle","generatedLabel")
     generateElement("div","label","Author: " + book[1],book[0]+book[1],"generatedDiv","generatedDiv")
     generateElement("hr","label","",book[0]+book[1],"generatedHr","generatedLabel")
-    generateElement("div","label","Read: " + book[2],book[0]+book[1],"generatedDiv"+book[0]+book[1],"generatedDiv")
+    generateElement("div","label","Read: " + book[2],book[0]+book[1],"readStatus"+book[0]+book[1],"generatedDiv")
     generateElement("button","label","Update",book[0]+book[1],"updateButton"+book[0]+book[1],"btn")
     generateElement("button","label","Delete",book[0]+book[1],"closeButton"+book[0]+book[1],"btn cancel")
 
@@ -74,20 +67,21 @@ function saveData(){
     let closeButtonListener = document.getElementById("closeButton"+book[0]+book[1]);
     closeButtonListener.addEventListener("click",function(event){
 
-        document.getElementById(book[0]+book[1]).remove();
+        let testing=this.id.substring(11)
+        document.getElementById(testing).remove();
 
         //check index in myLibrary. Remove the necessary book.
 
         for(i=0;i<myLibrary.length;i++){
+            
 
-            if(myLibrary[i][3]==indexHelper){
-                myLibrary = myLibrary.splice(i,i);
+            if(myLibrary[i][3]==testing){
+                myLibrary == myLibrary.splice(i,i);
 
-                
+                return
             }
 
             else{
-                console.log("not yet")
                 
             }
 
@@ -95,37 +89,37 @@ function saveData(){
 
     })
 
-    //update button event listener
-    //create the function that toggles a book's read status on your Book prototype instance
-    let updateButtonListener = document.getElementById("updateButton"+book[0]+book[1]);
-    updateButtonListener.addEventListener("click",function(event){
-
-
+//update button event listener
+//create the function that toggles a book's read status on your Book prototype instance
+let updateButtonListener = document.getElementById("updateButton"+book[0]+book[1]);
+updateButtonListener.addEventListener("click",function(event){
 
     for(i=0;i<myLibrary.length;i++){
         let testing=this.id.substring(12)
-        if(myLibrary[i][2]=="Yes" && myLibrary[i][3]==testing){
-            myLibrary[i][2]="No";
-
-            //change the displayed value to No
-            document.getElementById("generatedDiv"+book[0]+book[1]).innerHTML="Read: No"
-            
-
-        }
-
-        else{
+        let divTesting="readStatus"+testing;        
+        console.log(divTesting);
+        if(document.getElementById(divTesting).innerHTML=="Read: No"){
+            console.log("should be yes")
             myLibrary[i][2]="Yes";
-            document.getElementById("generatedDiv"+book[0]+book[1]).innerHTML="Read: Yes"
-            
+            document.getElementById(divTesting).innerHTML="Read: Yes"
+
+            return
+                   
+        }
+        else{
+            console.log("should be no")
+            myLibrary[i][2]="No";
+            document.getElementById(divTesting).innerHTML="Read: No"
+
+            return
 
         }
     }
 
+})
 
-    //else(//if read//)
 
-    //update info on card based on this prototype change
-    })
+
 }
 
 
