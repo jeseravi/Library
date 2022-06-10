@@ -74,9 +74,11 @@ button:hover{
 
 /* Add styles to the form container */
 .form-container {
-  max-width: 300px;
+  max-width: 250px;
   padding: 10px;
   background-color: white;
+  border:solid black 5px;
+  border-radius:12px;
 }
 
 /* Full-width input fields */
@@ -137,6 +139,8 @@ button:hover{
     display:flex;
     justify-content: center;
     margin-bottom:10px;
+    overflow:hidden;
+    white-space:nowrap;
 }
 
 #generatedDiv{
@@ -144,10 +148,14 @@ button:hover{
     font-size:17px;
     padding:15px;
     margin-bottom:10px;
+    overflow:hidden;
+    white-space:nowrap;
+
 }
 
 .generatedFormContainer{
     margin-left:50px;
-    max-height:350px;
+    max-height:360px;
     margin-top:50px;
+    
 }

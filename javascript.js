@@ -15,7 +15,11 @@ function saveData(){
 
     let book;
 
-    
+    if(document.getElementById("title").value =="" && document.getElementById("author").value=="" ){
+        alert("You must fill in both a title and author")
+        return;
+    }
+
     //terminates function and throws error if book title & author combo has already been added
 
     for(i=0;i<myLibrary.length;i++){
@@ -25,7 +29,8 @@ function saveData(){
 
             document.getElementById('form').reset();
 
-            return
+            return;
+
         }
     }
 
@@ -43,16 +48,14 @@ function saveData(){
 //take data from the book array and make a card with it    
 
     generateElement("div",book[0],"","libraryArea",book[0]+book[1],"form-container generatedFormContainer")
-    generateElement("div","label","Title: " + book[0],book[0]+book[1],"generatedTitle","generatedLabel")
+    generateElement("div","label",book[0],book[0]+book[1],"generatedTitle","generatedLabel")
     generateElement("div","label","Author: " + book[1],book[0]+book[1],"generatedDiv","generatedLabel")
     generateElement("hr","label","",book[0]+book[1],"generatedHr","generatedLabel")
     generateElement("div","label","Read: " + book[2],book[0]+book[1],"generatedDiv","generatedLabel")
     generateElement("button","label","Update",book[0]+book[1],"updateButton","btn")
-    generateElement("button","label","Close",book[0]+book[1],"updateButton","btn cancel")
+    generateElement("button","label","Delete",book[0]+book[1],"updateButton","btn cancel")
 
-
-
-
+//make the close button
 
 
 }
