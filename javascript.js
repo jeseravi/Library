@@ -1,3 +1,4 @@
+
 function openForm() {
     document.getElementById("myForm").style.display = "block";
 }
@@ -7,8 +8,37 @@ function closeForm() {
 }
 
 //array of each book
-let myLibrary=[];
+//myLibrary should match local storage
+let myLibrary=[]
+if(window.localStorage.getItem("myLibrary")==null){
+    window.localStorage.setItem("myLibrary",JSON.stringify(myLibrary));
+}
+else{
+    myLibrary=JSON.parse(window.localStorage.getItem("myLibrary"))
+}
 
+//generate the cards from local Storage
+if(myLibrary!=[]){
+    for(i=0;i<myLibrary.length;i++){
+
+        let libraryCopy = [];
+        for(i=0;i<myLibrary.length;i++){
+
+            libraryCopy[i]=myLibrary[i]
+
+        }
+
+        for(i=0;i<libraryCopy.length;i++){
+
+            let book = libraryCopy[i];
+            generateCard(book);
+            deleteListener(book);
+            updateListener(book);
+
+        }
+
+    }
+}
 
 //puts data from form into array book
 function saveData(){
@@ -49,12 +79,40 @@ function saveData(){
     book=[title,author,readStatus,indexHelper];
 
     myLibrary.push(book);
+    window.localStorage.setItem("myLibrary",JSON.stringify(myLibrary));
 
     //reset the form
     document.getElementById('form').reset();
 
 //take data from the book array and make a card with it    
+generateCard(book);
+    
+//delete button event listener
+deleteListener(book);
 
+//update button event listener
+//create the function that toggles a book's read status on your Book prototype instance
+updateListener(book);
+
+}
+
+function spliceTester(testing){
+    for(i=0;i<myLibrary.length;i++){
+          
+        if(myLibrary[i][3]==testing){
+
+            return i
+                    
+        }
+
+        else{
+            
+        }
+
+    }
+}
+
+function generateCard(book){
     generateElement("div",book[0],"","libraryArea",book[0]+book[1],"form-container generatedFormContainer")
     generateElement("div","label",book[0],book[0]+book[1],"generatedTitle","generatedLabel")
     generateElement("div","label","Author: " + book[1],book[0]+book[1],"generatedDiv","generatedDiv")
@@ -63,7 +121,9 @@ function saveData(){
     generateElement("button","label","Update",book[0]+book[1],"updateButton"+book[0]+book[1],"btn")
     generateElement("button","label","Delete",book[0]+book[1],"closeButton"+book[0]+book[1],"btn cancel")
 
-//delete button event listener
+}
+
+function deleteListener(book){
     let closeButtonListener = document.getElementById("closeButton"+book[0]+book[1]);
     closeButtonListener.addEventListener("click",function(event){
 
@@ -72,54 +132,54 @@ function saveData(){
 
         //check index in myLibrary. Remove the necessary book.
 
-        for(i=0;i<myLibrary.length;i++){
-            
+        let index = spliceTester(testing);
+        console.log(index);
+        console.log(myLibrary.splice(0,1))
 
-            if(myLibrary[i][3]==testing){
-                myLibrary == myLibrary.splice(i,i);
-
-                return
-            }
-
-            else{
-                
-            }
-
-        }
+        myLibrary == myLibrary.splice(index,index);
+        window.localStorage.setItem("myLibrary",JSON.stringify(myLibrary));
+        
 
     })
+}
 
-//update button event listener
-//create the function that toggles a book's read status on your Book prototype instance
-let updateButtonListener = document.getElementById("updateButton"+book[0]+book[1]);
-updateButtonListener.addEventListener("click",function(event){
+function updateListener(book){
+    let updateButtonListener = document.getElementById("updateButton"+book[0]+book[1]);
+    updateButtonListener.addEventListener("click",function(event){
+        
+        let testing=this.id.substring(12);
+        let divTesting="readStatus"+testing;
+        let index = deleteTesting(testing);
+        console.log(index);
 
-    for(i=0;i<myLibrary.length;i++){
-        let testing=this.id.substring(12)
-        let divTesting="readStatus"+testing;        
-        console.log(divTesting);
-        if(document.getElementById(divTesting).innerHTML=="Read: No"){
-            console.log("should be yes")
-            myLibrary[i][2]="Yes";
-            document.getElementById(divTesting).innerHTML="Read: Yes"
-
-            return
-                   
+        if(myLibrary[index][2]=="Yes"){
+            myLibrary[index][2]="No";
+            document.getElementById(divTesting).innerHTML="Read: No"
+            window.localStorage.setItem("myLibrary",JSON.stringify(myLibrary));
         }
         else{
-            console.log("should be no")
-            myLibrary[i][2]="No";
-            document.getElementById(divTesting).innerHTML="Read: No"
-
-            return
-
+            myLibrary[index][2]="Yes";
+            document.getElementById(divTesting).innerHTML="Read: Yes"
+            window.localStorage.setItem("myLibrary",JSON.stringify(myLibrary));
         }
+    })
+}
+
+function deleteTesting(testing){
+
+    for(i=0;i<myLibrary.length;i++){
+              
+        if(myLibrary[i][3]==testing){
+    
+            return i
+                        
+        }
+    
+        else{
+                
+        }
+    
     }
-
-})
-
-
-
 }
 
 
@@ -138,5 +198,3 @@ function generateElement(whatIsIt,entryName,innerHTML,whereToPut,id,chosenClass)
     generateEntry.innerHTML=generateHTML;
     document.getElementById(generateWhere).appendChild(generateEntry);
 }
-
-
